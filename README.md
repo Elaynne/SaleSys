@@ -7,8 +7,6 @@ This project is goingo to be a generic prototype of a sales system created in As
 * Products sale
 * Update stock after sale automatically
 
-![](header.png)
-
 _The script needed to create the database is already available (schema.sql) with initial data of Products and Sales made._
 
 ## Development setup
@@ -29,9 +27,3 @@ Windows 10, Visual Studio 2017, SQL Server 2016
 * Create dashboard for best sellers by category
 
 Elaynne Torres – [Linkedin](https://www.linkedin.com/in/elaynne-torres-888606104/) – elaynne.torres@gmail.com
-
-<!-- Markdown link & img dfn's -->
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
