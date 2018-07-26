@@ -1,0 +1,119 @@
+﻿@model SalesSys.Models.Product
+
+<section class="content-header">
+    <h1>Create new product</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-home"></i> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li><a href="#">Product</a></li>
+        <li class="active">@Html.ActionLink("Create", "Create", "Products")</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h4>Product's form</h4>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Create", "Products", FormMethod.Post, new {@enctype = "multipart/form-data", @class = "form-horizontal" }))
+        {
+            <div class="box-body">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal col-md-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IdProduct)
+
+
+                    <div id="preview" class="form-group col-md-5">
+                        <span >
+                            <img src="~/dist/img/boxed-bg.jpg" id="imgThumbnail" alt="preview" class="img-thumbnail" style="width:200px; height:200px;">
+                            
+                            <input type="file" id="productImg" name="Image" style="margin: 10px;">
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" }) 
+                        </span>
+                    </div>
+
+                    <div class="form-group  col-md-7">
+
+                        <label class="control-label">Code</label>
+                        <div>
+                            @Html.EditorFor(model => model.Code, new { htmlAttributes = new { id = "code", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="control-label">Name</label>
+                        <div>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { id = "name", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div>
+                            <label class="control-label">Description</label>
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { id = "description", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="control-label">Amount</label>
+                        <div>
+                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { id = "amount", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="control-label">Manufacture Date</label>
+                        <div>
+                            <input type="text" class="form-control" id="datepicker" name="ManufactureDate">
+
+                        </div>
+
+                        <label class="control-label">Price</label>
+                        <div>
+                            @Html.EditorFor(model => model.PriceString, new { htmlAttributes = new { id = "price", @class = "form-control", maxlength = 13 } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" value="Save" class="btn btn-primary pull-right">
+                    Save
+                </button>
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary pull-left" })
+            </div>
+        }
+
+    </div>
+</section>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(function () {
+        $('#datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+        $('#price').maskMoney({
+            prefix: 'R$ ',
+            allowNegative: false,
+            thousands: '.',
+            decimal: ',',
+        }); 
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgThumbnail').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#productImg").change(function () {
+        readURL(this);
+    });
+    </script>
+}
